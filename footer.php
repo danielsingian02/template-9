@@ -11,21 +11,44 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'template-9' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'template-9' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'template-9' ), 'template-9', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+    <footer id="colophon" class="site-footer">
+        <div class="footer-content">
+            <div class="site-footer-icon">
+                <?php
+                if ( $siteIcon = get_site_icon_url() ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-footer-title" rel="home">
+                        <img src="<?php echo $siteIcon ?>"
+                             class="site-footer-icon"/>
+                    </a>
+                <?php
+                else :
+                    ?>
+                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                <?php
+                endif;
+                ?>
+            </div>
+            <div class="footer-text-content">
+                <nav id="site-navigation" class="">
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'menu-1',
+                            'menu_id'        => 'primary-menu',
+                        )
+                    );
+                    ?>
+                </nav><!-- #site-navigation -->
+            </div>
+            <div class="copyright">
+                <p>
+                    <?php
+                    echo get_option("footer_copyright") ?? "© Copyright 2021 HOA Management Name Here";
+                    ?>
+                </p>
+            </div>
+        </div>
+    </footer>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
