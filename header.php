@@ -23,37 +23,88 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'template-9' ); ?></a>
-
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$template_9_description = get_bloginfo( 'description', 'display' );
-			if ( $template_9_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $template_9_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+        <div class="header-wrapper">
+            <div class="site-branding">
+                <?php
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'template-9' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
+                if ( $siteIcon = get_site_icon_url() ) : ?>
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-title" rel="home">
+                        <img src="<?php echo $siteIcon ?>" class="site-icon"/>
+                    </a>
+
+                <?php
+                else :
+                    ?>
+                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                <?php
+                endif;
+                ?>
+            </div>
+
+            <div class="main-navigation">
+                <nav id="site-navigation" class="">
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'menu-1',
+                            'menu_id'        => 'primary-menu',
+                        )
+                    );
+                    ?>
+                </nav><!-- #site-navigation -->
+
+                <div class="mobile-header">
+                    <!-- Hamburger Menu for mobile responsive -->
+                    <button
+                            class="btn hamburger-btn"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasExample"
+                            aria-controls="offcanvasExample">
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <div class="offcanvas offcanvas-end menu-canvas" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header">
+                            <div class="mobile-site-branding">
+                                <?php
+
+                                if ( $siteIcon = get_site_icon_url() ) : ?>
+                                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-title" rel="home">
+                                        <img src="<?php echo $siteIcon ?>"
+                                             class="site-icon"/>
+                                    </a>
+                                <?php
+                                else :
+                                    ?>
+                                    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+                                <?php
+                                endif;
+                                ?>
+                            </div>
+
+                            <h5 class="offcanvas-title" >
+                                <?php
+                                echo get_bloginfo( 'name' );
+                                ?>
+                            </h5>
+
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <?php
+                            wp_nav_menu(
+                                array(
+                                    'theme_location' => 'menu-1',
+                                    'menu_id'        => 'primary-menu',
+                                )
+                            );
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 	</header><!-- #masthead -->
