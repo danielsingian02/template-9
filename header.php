@@ -43,7 +43,7 @@
             </div>
 
             <div class="main-navigation">
-                <nav id="site-navigation" class="">
+                <nav class="site-navigation">
                     <?php
                     wp_nav_menu(
                         array(
