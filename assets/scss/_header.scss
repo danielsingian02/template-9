@@ -10,7 +10,8 @@
     margin: auto;
     padding: 17px 0;
 
-    & a, .site-title{
+    & a,
+    .site-title {
       color: white;
       margin: 0;
       text-decoration: none;
@@ -21,12 +22,13 @@
       }
     }
 
-    & > * {
+    &>* {
       display: flex;
       width: 100%;
     }
 
-    // Site Icon container
+    F // Site Icon container
+
     & .site-branding {
       display: flex;
       flex-direction: column;
@@ -38,7 +40,7 @@
     }
 
     & .main-navigation {
-      & > * {
+      &>* {
         width: 100%;
       }
 
@@ -64,11 +66,13 @@
             list-style-type: none;
             text-transform: uppercase;
 
-            &.current_page_item, &:hover {
+            &.current_page_item,
+            &:hover {
               text-shadow: 1px 0 0 currentColor;
             }
           }
         }
+
         @media #{ v.$media_mobile } {
           display: none;
         }
@@ -112,7 +116,8 @@
           & li {
             list-style-type: none;
 
-            &.current_page_item, &:hover {
+            &.current_page_item,
+            &:hover {
               text-shadow: 1px 0 0 currentColor;
             }
           }
